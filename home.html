@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+    <head>
+        <title>T2A1 - Interaction Design</title>
+        <link href="https://fonts.googleapis.com/css2?family=Arima:wght@400;700&display=swap" rel="stylesheet"> 
+        <style>
+            
+            body {
+                background: linear-gradient(to bottom, rgba(35,83,138,1) 31%,rgba(167,207,223,1) 87%,rgba(167,207,223,1) 90%);
+                color:seashell;
+                text-align: left; 
+                font-family: 'Arima', sans-serif; 
+            }
+            .elf {
+                position: absolute; 
+                top: 10px; 
+                right: 10px; 
+                width: 200px; 
+                z-index: 10;
+            }
+            .mee-siam-red {
+                color:#f1948a;
+            }
+            #main-bg {
+                background:#EBDEF0;
+            }
+            h3{
+                background:#663366;
+                color: white;
+                padding:20px;
+            }
+            #date-time-container {
+                display: flex;
+                align-items: baseline;
+                gap: 10px; 
+                font-size: 15px;
+                font-weight: bold;
+            }
+            .divider {
+                display: inline-block;
+                width: 1px;
+                height: 20px; 
+                background-color: seashell;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <audio controls autoplay loop>
+            <source src="smurfsong.mp3" type="audio/mpeg"> 
+        </audio>
+        <img src="giphy-unscreen.gif" alt="Elf skipping rope" class="elf" />
+        <h1 class="mee-siam-red"> Eunice Loh </h1>
+         <div id="date-time-container">
+            <h4 id="current-date"></h4> 
+            <span class="divider"></span>
+            <h4 id="current-time"></h4> 
+            </div>
+
+        <h3 class="mee-siam-red"> PROFILE </h3>
+        
+        <p><b><i><u>What is Lorem Ipsum?</u></i></b>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            <br/>
+            <br/>
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+        <p><b><i><u>Where does it come from?</u></i></b>
+        <p>Contrary to popular belief, Lorem Ipsum is not simply random text.
+            <br/>
+            <br/>
+            It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+
+        </p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+        </p> I am currently studying at <a href="https://www.np.edu.sg/schools-courses/academic-schools/school-of-film-media-studies" target="_blank">School of Film and Media Studies - NP</a></p>
+        <h3 class="mee-siam-red"> PORTFOLIO </h3>
+        <img src="cat.jpeg" width="300"/>
+        <img src="https://media.giphy.com/media/3NtY188QaxDdC/giphy.gif?cid=82a1493bzh0lewt5y5qfltyrydkcnm2sa59v5o1b6120sy8m&ep=v1_gifs_trending&rid=giphy.gif&ct=g" width="300" title = "meow!"/>
+
+        <h3 class="mee-siam-red"> SKILLS </h3>
+        <ul>
+            <li>Photoshop</li>
+            <li>Web Design</li>
+            <li>Illustrator</li>
+        </ul>
+        <script>
+            function displayDate() {
+                const dateElement = document.getElementById('current-date');
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                const today = new Date().toLocaleDateString('en-US', options);
+                dateElement.textContent = today;
+            }
+            function displayTime() {
+                const timeElement = document.getElementById('current-time');
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+            }
+            window.onload = function() {
+                displayDate();
+                displayTime();
+                setInterval(displayTime, 1000); 
+            };
+        </script>
+    </body>
+
+</html>
