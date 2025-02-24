@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Outfit", sans-serif;
+            color: #f4f4f4;
+            position: relative;
+            margin: 0; /* Ensure no extra margins */
+            padding: 0; /* Ensure no extra padding */
+        }
+        #container {
+            width: 960px;
+            height: 540px;
+            overflow: hidden;
+            position: absolute; /* Ensures it sticks to the top-left */
+            top: 0;
+            left: 0;
+        }
+        h1 {
+            font-size: 2.0em;
+            font-weight: 700;
+            color: darkslategray;
+            margin-bottom: 30px;
+            text-align: center;
+            
+        }
+
+        .congrats-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 100px;
+            width: 960px; 
+            height: 540px;
+            background: darkslategray;
+            opacity: 90%;
+            color: seashell;
+            text-align: center;
+            font-size: 1.5em;
+            border-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #next-page {
+            width: 180px;
+            height: 50px;
+            background: darkslategray;
+            font-size: 1.1em;
+            font-weight: 600;
+            align-items: center;
+            left: 390px;
+            display: none; /* Initially hidden */
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            position: absolute;
+            bottom: 30px; /* Fixed at the bottom */
+
+        }
+
+        #next-page a {
+            color: seashell;
+            text-decoration: none;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #next-page:hover {
+            background-color: rgb(24, 41, 41);
+            transition: background-color 0.5s ease;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        }
+
+        .game-container {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            position: relative;
+            margin-top: 10px; /* Pushed everything down */
+            
+        }
+        .box-container, .match-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .box, .match-box {
+            width: 300px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: slategray;
+            border-radius: 10px;
+            font-size: 14px;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .match-box {
+            background-color: #2b7bc0;
+        }
+
+        .dragging {
+            opacity: 100;
+        }
+
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Match the applications with their concepts </h1>
+
+        <svg width="100%" height="100%">
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="black"/>
+                </marker>
+            </defs>
+        </svg>
+
+        <div class="game-container">
+            <div class="box-container">
+                <div class="box" id="box1" draggable="true">GenAI quickly identifies trends, and optimises performances</div>
+                <div class="box" id="box2" draggable="true">GenAI provides creative inspiration</div>
+                <div class="box" id="box3" draggable="true">In the marketing industry, for instance, GenAI can personalise advertisements more efficiently for audiences</div>
+            </div>
+            <div class="match-container">
+                <div class="match-box" id="match1" data-match="box2">Enhanced content creation</div>
+                <div class="match-box" id="match2" data-match="box1">Strengthen efficiency</div>
+                <div class="match-box" id="match3" data-match="box3">Drive innovation in industries</div>
+            </div>
+        </div>
+
+        <div class="congrats-message" id="congrats">
+            🎉🎉Congrats, you got them all right! Let's move on. 
+        </div>
+
+        <!-- Next Page Button -->
+        <div id="next-page">
+            <a href="2.2_MapofGenAI.html">Next</a>
+        </div>
+
+        <script>
+            const boxes = document.querySelectorAll('.box');
+            const matchBoxes = document.querySelectorAll('.match-box');
+            const svg = document.querySelector("svg");
+            let correctMatches = 0;
+        
+            boxes.forEach(box => {
+                box.addEventListener('dragstart', dragStart);
+                box.addEventListener('dragend', dragEnd);
+            });
+        
+            matchBoxes.forEach(matchBox => {
+                matchBox.addEventListener('dragover', dragOver);
+                matchBox.addEventListener('dragenter', dragEnter);
+                matchBox.addEventListener('dragleave', dragLeave);
+                matchBox.addEventListener('drop', drop);
+            });
+        
+            function dragStart(e) {
+                e.dataTransfer.setData('text', e.target.id);
+            }
+        
+            function dragEnd() {}
+        
+            function dragOver(e) {
+                e.preventDefault();
+            }
+        
+            function dragEnter(e) {
+                e.preventDefault();
+            }
+        
+            function dragLeave() {}
+        
+            function drop(e) {
+                e.preventDefault();
+                const draggedBoxId = e.dataTransfer.getData('text');
+                const draggedBox = document.getElementById(draggedBoxId);
+                const correctMatch = e.target.getAttribute('data-match');
+        
+                if (draggedBoxId === correctMatch) {
+                    drawAnimatedLine(draggedBox, e.target); // Animate the line drawing
+                    correctMatches++;
+        
+                    if (correctMatches === 3) {
+                        setTimeout(() => showCongratsMessage(), 1000); // Show after 2 seconds
+                    }
+                }
+            }
+        
+            function drawAnimatedLine(startElement, endElement) {
+                const startRect = startElement.getBoundingClientRect();
+                const endRect = endElement.getBoundingClientRect();
+                const svgRect = svg.getBoundingClientRect();
+        
+                const startX = startRect.right - svgRect.left;
+                const startY = startRect.top + startRect.height / 2 - svgRect.top;
+                const endX = endRect.left - svgRect.left;
+                const endY = endRect.top + endRect.height / 2 - svgRect.top;
+        
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute("x1", startX);
+                line.setAttribute("y1", startY);
+                line.setAttribute("x2", startX); // Start with a length of 0
+                line.setAttribute("y2", startY);
+                line.setAttribute("stroke", "darkslategray"); // Solid color
+                line.setAttribute("stroke-width", "3");
+                line.setAttribute("marker-end", "url(#arrowhead)");
+        
+                svg.appendChild(line);
+        
+                // Animate the line drawing effect
+                setTimeout(() => {
+                    line.setAttribute("x2", endX);
+                    line.setAttribute("y2", endY);
+                    line.style.transition = "x2 2.0s ease-out, y2 2.0s ease-out";
+                }, 10);
+            }
+        
+            function showCongratsMessage() {
+                const congratsMessage = document.getElementById("congrats");
+                const nextButton = document.getElementById("next-page");
+        
+                congratsMessage.style.display = "flex";
+                nextButton.style.display = "none";
+        
+                setTimeout(() => {
+                    congratsMessage.style.display = "none";
+                    nextButton.style.display = "flex";
+                }, 2000);
+            }
+        </script>
+    </div>
+</body>
+</html>

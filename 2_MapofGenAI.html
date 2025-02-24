@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+    <title>Map of Knowledge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            min-height: 100vh;
+            color: seashell;
+            text-align: left;
+            font-family: "Outfit", serif;
+            overflow: hidden;
+            cursor: url('cursor.png'), auto;
+            
+        }
+
+        /* Container aligned to top-left */
+        #container {
+                width: 960px;
+                height: 540px;
+                overflow: hidden;
+                position: absolute; /* Ensures it starts from top-left */
+                top: 0;
+                left: 0;
+                display: flex;
+                
+            }
+        
+        /* Title */
+        h1 {
+                font-family: "Outfit", serif;
+                font-size: 2.2em;
+                font-weight: 700;
+                text-align: center;
+                color: darkslategray;
+                margin-left: 5px;
+        }
+        h2{
+            font-family: "Outfit", serif;
+            font-size: 1.8em;
+            font-weight: 500;
+            text-align: center;
+            color: darkslategray;
+        }
+
+        /* Extra Image (Positioned Above Image 3) */
+        #cat-image {
+            width: 195px;
+            position: absolute;
+            left: 810px;
+            bottom: 150px;
+            z-index: 10;
+        }
+
+        /* Images (Kept in original positions) */
+        #column1, #column2, #column3 {
+            transition: transform 0.8s ease;
+            
+        }
+
+        #column1 { width: 300px; margin-top: 280px; margin-left: -50px;}
+        #column1:hover { transform: scale(1.1); }
+
+        #column2 { width: 490px; margin-top: 260px; }
+
+        #column3 { width: 280px; margin-top: 300px; }
+
+        /* Water Swirl + Ripple Effect */
+        #transition-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, aliceblue 10%, #276ea8 80%, transparent 70%);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 1s ease-in-out;
+            pointer-events: none;
+            z-index: 9999;
+            filter: url(#ripple);
+        }
+
+        /* Ripple Animation */
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
+        .ripple-effect {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            animation: ripple 1.3s linear infinite;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>There are 3 stages you need to pass. Complete all 3 to gather all the GizmoSparks.<h2>•┈๑⋅⋯ Stage 1, here we come! ⋯⋅๑┈• </h2>
+    
+    <div id="container">
+        <div id="stage1">
+            <a href="2.Stage1.html">
+                <img id="column1" src="linked stage1.png" alt="Stage 1">
+            </a>
+        </div>
+        <div id="stage2">
+            <img id="column2" src="linked stage2.png" alt="Stage 2">
+        </div>
+        <div id="stage3">
+            <img id="column3" src="linked stage3.png" alt="Stage 3">
+        </div>
+
+        <!-- Extra Image Positioned Above Stage 3 -->
+        <img id="cat-image" src="tiltedhappycat.png" alt="Cat Image">
+    </div>
+
+    <!-- Water Swirl + Ripple Overlay -->
+    <div id="transition-overlay"></div>
+
+    <!-- SVG Filter for Ripple Effect -->
+    <svg style="display: none;">
+        <filter id="ripple">
+            <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="10"/>
+        </filter>
+    </svg>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let overlay = document.getElementById("transition-overlay");
+
+            document.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    let href = this.href;
+
+                    // Expand swirl
+                    overlay.style.transform = "scale(10)";
+
+                    // Create ripple effect
+                    let ripple = document.createElement("div");
+                    ripple.classList.add("ripple-effect");
+                    ripple.style.left = "50%";
+                    ripple.style.top = "50%";
+                    overlay.appendChild(ripple);
+
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 1200);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

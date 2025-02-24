@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Learn about GenAI with me!</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+        <style>
+            body {
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                min-height: 100vh;
+                color:seashell;
+                text-align: left; 
+                font-family: "Outfit", serif;
+                overflow-x: hidden;
+                place-items: center;
+                display: grid;
+                cursor: url('cursor.png'), auto;
+            }
+            #container {
+                width: 95%;
+                max-width: 1200px;
+                margin-top: 5px;
+                padding: 10px;
+                overflow: hidden;
+                
+            }
+
+            /* Title */
+            #title {
+                font-size: 2.0em;
+                font-weight: 700;
+                color: darkslategray;
+                margin-bottom: 15px;
+                margin-top: 5px;
+                text-align: center;
+            }
+
+            /* Definition */
+            #definition {
+                font-size: 1.1em;
+                text-align: left;
+                padding: 10px 20px;
+                border-left: 4px solid teal;
+                color: black;
+                margin-bottom: 20px;
+            }
+
+            /* Green Boxes Section */
+            #box-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                margin-top: 20px;
+            }
+
+            /* Row for Box 1 & 2 */
+            .box-row {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                width: 100%;
+            }
+
+            /* Box 1 & Box 2 (Half Width) */
+            .box {
+                width: 48%;
+                height: 100px; /* Adjust height */
+                background: white;
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 15px 0 rgba(0,0,0,0.19);
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: darkslategray;
+                font-size: 0.9em;
+                text-align: left;
+                padding: 10px;
+                font-weight: 400;
+            }
+            /* Styling for Text Inside Boxes */
+            .box-text {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-left: 30px; /* To make space for the icon */
+            }
+
+            .box-text strong {
+                display: block;
+                margin-bottom: 5px;
+        
+            }
+
+            /* Box 3 (Full Width) */
+            #box3 {
+                
+                width: 860px; 
+                height: 100px;
+                background: white;
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: darkslategray;
+                font-size: 0.9em;
+                text-align: left;
+                padding: 15px;
+                font-weight: 400;
+            }
+
+            /* Small Image Icon for Each Box */
+            .box img {
+                width: 50px;  /* Set a uniform width */
+                height: 90px; /* Set a uniform height */
+                object-fit: contain; /* Ensures the image scales correctly without distortion */
+                margin-right: -10px; /* Adds spacing between the image and text */
+                flex-shrink: 0; /* Prevents images from shrinking */
+                object-fit: cover;
+                object-fit: scale-down;
+            }
+            .box img, #box3 img {
+                width: 50px; /* Set a fixed width */
+                height: 50px; /* Set a fixed height */
+                object-fit: contain; /* Ensures images scale properly */
+                flex-shrink: 0; /* Prevents images from shrinking */
+                margin-left: 10px;
+            }
+            /* Next Page Button */
+            #next-page {
+                width: 180px;
+                height: 50px;
+                background: darkslategray;
+                font-size: 1.1em;
+                font-weight: 600;
+                align-items: center; /* Centers text vertically */
+                justify-content: center; 
+                display: flex;
+                border-radius: 10px;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                margin: 30px auto;
+                cursor: pointer;
+            }
+            #next-page a {
+                color: seashell;
+                text-decoration: none;
+                display: flex;
+                width: 100%;
+                height: 100%;
+                align-items: center; /* Centers text vertically */
+                justify-content: center; 
+            }
+            #next-page:hover {
+                background-color: rgb(24, 41, 41); /* Darken the background on hover */
+                transition: background-color 0.5s ease; /* Smooth transition for hover */
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            }
+            
+            /* Responsive Design */
+            @media (max-width: 768px) {
+                .box-row {
+                    flex-direction: column;
+                }
+                .box {
+                    width: 100%; /* Stack full width on small screens */
+                }
+                #box3 {
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+
+
+        <div id="container">
+            <!-- Title Section -->
+            <div id="title">What is Generative AI?</div>
+
+            <!-- Definition Section -->
+            <div id="definition">
+                <strong>Definition:</strong> Generative AI (GenAI) refers to artificial intelligence models that create new content like text, images, music, and videos, by learning from existing data.
+            </div>
+
+            <!-- Green Boxes Section -->
+            <div id="box-container">
+                <div class="box-row">
+                    <div class="box">
+                        <img src="stage1_computer.png" alt="Icon 1"> 
+                        <div class="box-text">
+                            <strong>Enhanced content creation</strong>
+                            GenAI serves as a powerful tool for artists, designers, musicians, and writers by providing inspiration and generating new ideas.
+                        </div>
+                    </div>
+                    <div class="box">
+                        <img src="stage1_scope.png" alt="Icon 2"> 
+                        <div class="box-text">
+                            <strong>Boosts innovation across industries</strong>
+                            In areas like healthcare, AI-powered diagnostic tools detect diseases earlier and personalize treatment plans.
+                        </div>
+                    </div>
+                </div>
+                <div id="box3">
+                    <img src="stage1_cog.png" alt="Icon 3"> 
+                    <div class="box-text">
+                        <strong>Increased efficiency</strong>
+                        AI-powered tools assist developers by autocompleting code, identifying errors, and optimizing performance. AI identifies trends in seconds.
+                    </div>
+                </div>
+            </div>
+            <div id="next-page">
+                <a href="2.Stage1 Quiz.html">Pss...quiz time →</a>
+            </div>
+        </div>
+
+    </body>
+</html>
+
+
+
+    

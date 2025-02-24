@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Learn about GenAI with me!</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+        <style>
+            body {
+                color: seashell;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                text-align: left; 
+                font-family: "Outfit", serif;
+                overflow: hidden;
+                place-items: center;
+                display: grid;
+                cursor: url('cursor.png'), auto;
+                margin:0;
+                padding:0;
+            }
+            #container {
+                width: 960px;
+                height: 540px;
+                overflow: hidden;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            #container img {
+                position: absolute;
+                bottom: 0;
+                top: 150px;
+                left: 90px;
+                width: 200px;
+                height: auto;
+                transform: translateX(-20px);
+                max-width: 100%;
+            }
+
+            h1 {
+                font-family: "Outfit", serif;
+                font-size: 2.2em;
+                font-weight: 700;
+                text-align: center;
+                color: darkslategray;
+                margin-left: 5px;
+            }
+
+            #hero {
+                width: 180px;
+                height: 50px;
+                background: darkslategray;
+                font-size: 1.5em;
+                font-weight: 600;
+                text-align: center;
+                border-radius: 10px;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                position: absolute;
+                bottom: 50px;
+                left: 50%;
+                transform: translateX(-50%);
+                visibility: hidden; /* Initially hidden */
+            }
+
+            #hero a {
+                color: seashell;
+                text-decoration: none;
+                display: inline-block;
+                padding: 10px 20px;
+                font-weight: bold;
+            }
+
+            #hero:hover {
+                background-color: rgb(24, 41, 41);
+                transition: background-color 0.5s ease;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+            }
+
+            /* Speech Bubble */
+            .speech-bubble {
+                position: absolute;
+                top: 200px;
+                left: 270px;
+                background: white;
+                color: darkslategray;
+                font-size: 1.4em;
+                font-weight: 500;
+                padding: 15px 20px;
+                width: 500px;
+                border-radius: 15px;
+                text-align: left;
+                border: 3px dotted darkslategray;
+                box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+                
+            }
+
+            /* Speech Bubble Tail */
+            .speech-bubble::after {
+                content: "";
+                position: absolute;
+                bottom: -20px;
+                left: 5%;
+                border-width: 10px;
+                border-style: dotted;
+                border-color: darkslategray transparent transparent transparent;
+            }
+
+            #column1 {
+                margin: 5px 30px;
+            }
+
+            #column2 {
+                margin: 170px 600px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <img id="column1" src="sad_cat.png"/>
+            <img id="column2" src="machine.png"/>
+            <h1> HEY THERE! I'm so lost... ( ꩜ ᯅ ꩜;)⁭ ⁭</br> My time machine broke down, and I need help getting back home!</h1>
+
+            <!-- Speech Bubble -->
+            <div class="speech-bubble" id="speechBubble" data-fulltext="I need to collect GizmoSparks to activate my time machine as soon as possible. You have to help me! (Click on blue bg to jam)">
+            </div>
+
+            <div id="hero"> 
+                <a href="1.1_Entrypage.html">I do...?</a>
+            </div>
+        </div>
+
+        <script>
+            function typeText(element, text, speed = 50, callback) {
+                let i = 0;
+                element.innerHTML = ""; // Clear existing text
+                function typing() {
+                    if (i < text.length) {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(typing, speed);
+                    } else if (callback) {
+                        callback(); // Execute callback function after typing
+                    }
+                }
+                typing();
+            }
+
+            window.onload = function() {
+                let speechBubble = document.getElementById("speechBubble");
+                let heroButton = document.getElementById("hero");
+                let text = speechBubble.dataset.fulltext;
+
+                typeText(speechBubble, text, 40, function() {
+                    heroButton.style.visibility = "visible"; // Show button after typing completes
+                });
+            };
+        </script>
+    </body>
+</html>

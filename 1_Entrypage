@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Learn about GenAI with me!</title>
+        <style>
+
+            body {
+                background: linear-gradient(to bottom, rgba(35,83,138,1) 31%,rgba(167,207,223,1) 87%,rgba(167,207,223,1) 90%);
+                color:seashell;
+                text-align: left; 
+                font-family: 'Arima', sans-serif; 
+            }
+            #container{
+		        background: #111111;
+		        width: 600px;
+		        margin: 0 auto;
+	        }
+	        h1 {
+		        font-family: "Titillium Web", sans-serif;
+  		        font-weight: 200;
+  		        font-style: normal;
+		        font-size: 2.5em;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <img src="logo-razer.jpg"/>
+            <h1> Stay safe and Get Geared for <br/>
+            Work and Play</h1>
+        <canvas class="canvas js-canvas has-cursor-grab" data-engine="three.js r164" width="1498" height="1556" style="width: 749px; height: 778px; touch-action: none;"></canvas>
+    </body>
